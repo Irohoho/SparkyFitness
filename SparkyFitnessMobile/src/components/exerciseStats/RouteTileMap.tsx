@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { useCSSVariable, useUniwind } from 'uniwind';
 import type { GpsTrackPoint } from '@workspace/shared';
 import { routeRegion, usableRoutePoints } from '../../utils/cardioSession';
+import { isDarkTheme } from '../../services/themeService';
 import MapSurface from '../maps/MapSurface';
 
 const HEIGHT = 220;
@@ -27,7 +28,7 @@ const RouteTileMap: React.FC<RouteTileMapProps> = ({
   accessibilityLabel,
 }) => {
   const { theme } = useUniwind();
-  const isDark = theme === 'dark' || theme === 'amoled';
+  const isDark = isDarkTheme(theme);
   const [routeColor, startColor, finishColor] = useCSSVariable([
     '--color-accent-primary',
     '--color-icon-success',

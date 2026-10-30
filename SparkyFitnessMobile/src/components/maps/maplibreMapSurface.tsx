@@ -17,6 +17,7 @@ import {
   ViewAnnotation,
   type ViewAnnotationEvent,
 } from '@maplibre/maplibre-react-native';
+import { useUniwind } from 'uniwind';
 import { resolveMapLibreStyle, zoomForLatitudeDelta } from './mapStyles';
 import type {
   MapCoordinate,
@@ -193,6 +194,7 @@ const MapLibreMapSurface = forwardRef<MapSurfaceHandle, MapSurfaceProps>(
     },
     ref
   ) {
+    const { theme } = useUniwind();
     const cameraRef = useRef<CameraRef>(null);
     const styleLoaded = useRef(false);
     const pendingCameraAction = useRef<((camera: CameraRef) => void) | null>(
@@ -278,7 +280,7 @@ const MapLibreMapSurface = forwardRef<MapSurfaceHandle, MapSurfaceProps>(
     return (
       <Map
         style={StyleSheet.absoluteFill}
-        mapStyle={resolveMapLibreStyle(dark)}
+        mapStyle={resolveMapLibreStyle(dark, theme)}
         logo={false}
         attribution
         compass={false}

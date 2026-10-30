@@ -257,5 +257,85 @@
       --color-date-past: hsl(20, 85%, 60%);
       --color-date-future: hsl(200, 80%, 65%);
     }
+
+    @variant catppuccin-mocha {
+      --color-background: hsl(240, 21%, 15%);
+      --color-surface: hsl(237, 16%, 23%);
+      --color-raised: hsl(238, 13%, 31%);
+      --color-chrome: hsl(240, 21%, 12%);
+
+      --color-border-subtle: hsl(237, 16%, 23%);
+      --color-border: hsl(238, 13%, 31%);
+      --color-border-strong: hsl(237, 12%, 39%);
+      --color-chrome-border: hsl(237, 16%, 23%);
+
+      --color-text-primary: hsl(226, 64%, 88%);
+      --color-text-secondary: hsl(228, 24%, 72%);
+      --color-text-muted: hsl(230, 13%, 55%);
+      --color-icon-decorative: hsl(230, 13%, 55%);
+
+      --color-accent-primary: hsl(267, 84%, 81%);
+      --color-accent-muted: hsl(267, 45%, 65%);
+      --color-accent-text: hsl(240, 23%, 9%);
+
+      --color-text-link: hsl(199, 76%, 69%);
+
+      --color-tab-active: hsl(267, 84%, 81%);
+      --color-tab-inactive: hsl(230, 13%, 55%);
+      --color-form-enabled: hsl(267, 84%, 81%);
+      --color-form-disabled: hsl(238, 13%, 31%);
+
+      --color-calories: hsl(232, 97%, 85%);
+      --color-macro-protein: hsl(23, 92%, 75%);
+      --color-macro-carbs: hsl(115, 54%, 76%);
+      --color-macro-fat: hsl(199, 76%, 69%);
+      --color-macro-fiber: hsl(170, 57%, 73%);
+
+      --color-hydration: hsl(189, 71%, 73%);
+      --color-exercise: hsl(115, 54%, 76%);
+
+      --color-cat-slate: hsl(230, 13%, 55%);
+      --color-cat-pink: hsl(316, 72%, 86%);
+      --color-cat-violet: hsl(267, 84%, 81%);
+      --color-cat-orange: hsl(23, 92%, 75%);
+      --color-cat-green: hsl(115, 54%, 76%);
+      --color-cat-blue: hsl(217, 92%, 76%);
+      --color-cat-teal: hsl(170, 57%, 73%);
+      --color-cat-amber: hsl(41, 88%, 83%);
+
+      --color-progress-track: hsl(238, 13%, 31%);
+      --color-progress-rail: hsl(237, 16%, 23%);
+      --color-progress-overfill: hsl(343, 81%, 75%);
+
+      --color-bg-success: hsl(115, 30%, 20%);
+      --color-bg-info: hsl(217, 30%, 20%);
+      --color-bg-warning: hsl(41, 35%, 20%);
+      --color-bg-danger: hsl(343, 40%, 25%);
+      --color-bg-danger-subtle: hsl(343, 30%, 18%);
+
+      --color-text-success: hsl(115, 54%, 76%);
+      --color-icon-success: hsl(115, 54%, 76%);
+
+      --color-text-info: hsl(217, 92%, 76%);
+      --color-text-warning: hsl(41, 88%, 83%);
+      --color-icon-warning: hsl(41, 88%, 83%);
+      --color-text-danger: hsl(343, 81%, 90%);
+      --color-text-danger-subtle: hsl(343, 81%, 75%);
+      --color-icon-danger: hsl(343, 81%, 75%);
+
+      --color-pr: hsl(41, 88%, 83%);
+
+      --color-heart-rate: hsl(343, 81%, 75%);
+      --color-active-energy: hsl(23, 92%, 75%);
+
+      --color-wellness-menstrual: hsl(350, 65%, 77%);
+      --color-wellness-follicular: hsl(115, 54%, 76%);
+      --color-wellness-ovulation: hsl(199, 76%, 69%);
+      --color-wellness-luteal: hsl(267, 84%, 81%);
+      --color-wellness-pregnant: hsl(316, 72%, 86%);
+
+      --color-date-past: hsl(23, 92%, 75%);
+      --color-date-future: hsl(189, 71%, 73%);
+    }
   }
 }

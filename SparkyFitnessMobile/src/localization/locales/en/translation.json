@@ -183,6 +183,7 @@
       "light": "Light",
       "dark": "Dark",
       "amoled": "AMOLED",
+      "catppuccinMocha": "Catppuccin Mocha",
       "system": "System"
     },
     "liquidGlass": {
@@ -6937,9 +6938,6 @@
       "unitMi": "mi",
       "meters": "{{value}} m",
       "feet": "{{value}} ft",
-      "weather": "Weather",
-      "degreesC": "{{value}}°C",
-      "degreesF": "{{value}}°F",
       "floors": "Floors climbed",
       "floorsCount_one": "{{formattedCount}} floor",
       "floorsCount_other": "{{formattedCount}} floors",

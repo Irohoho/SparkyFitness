@@ -179,6 +179,7 @@ import ReauthModal from './src/components/ReauthModal';
 import ServerConfigModal from './src/components/ServerConfigModal';
 import { useAuth } from './src/hooks/useAuth';
 import { addLog } from './src/services/LogService';
+import { isDarkTheme } from './src/services/themeService';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import { FullWindowOverlay } from 'react-native-screens';
@@ -419,7 +420,7 @@ function AppContent() {
   );
 
   // Determine if we're in dark mode based on current theme
-  const isDarkMode = theme === 'dark' || theme === 'amoled';
+  const isDarkMode = isDarkTheme(theme);
 
   useEffect(() => {
     if (Platform.OS !== 'android') return;

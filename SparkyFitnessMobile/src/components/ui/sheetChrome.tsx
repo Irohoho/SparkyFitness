@@ -6,6 +6,7 @@ import {
 } from '@gorhom/bottom-sheet';
 import { FullWindowOverlay } from 'react-native-screens';
 import { useUniwind } from 'uniwind';
+import { isDarkTheme } from '../../services/themeService';
 
 // Render the sheet inside an iOS UIWindow so it sits above any native modal
 // presentation. No-op on Android.
@@ -22,7 +23,7 @@ export const sheetContainer =
  */
 export function useSheetBackdrop() {
   const { theme } = useUniwind();
-  const isDarkMode = theme === 'dark' || theme === 'amoled';
+  const isDarkMode = isDarkTheme(theme);
 
   return useCallback(
     (props: BottomSheetBackdropProps) => (

@@ -18,6 +18,7 @@ import { BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useCSSVariable, useUniwind } from 'uniwind';
 import Icon from './Icon';
 import { sheetContainer, useSheetBackdrop } from './ui/sheetChrome';
+import { isDarkTheme } from '../services/themeService';
 import type {
   FoodUnitSelectionResult,
   FoodUnitVariant,
@@ -103,7 +104,7 @@ const FoodUnitSelectorSheet: React.FC<FoodUnitSelectorSheetProps> = ({
     '--color-icon-warning',
     '--color-icon-danger',
   ]) as [string, string, string, string, string, string, string, string];
-  const isDarkMode = theme === 'dark' || theme === 'amoled';
+  const isDarkMode = isDarkTheme(theme);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Confidence-tinted color for the AI-provenance Sparkles icon. All three
