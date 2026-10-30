@@ -6,17 +6,35 @@ import { addLog } from './LogService';
 
 const THEME_KEY = '@HealthConnect:appTheme';
 
-export type ThemePreference = 'System' | 'Light' | 'Dark' | 'Amoled';
+export type ThemePreference =
+  'System' | 'Light' | 'Dark' | 'Amoled' | 'CatppuccinMocha';
+
+export type UniwindTheme =
+  'system' | 'light' | 'dark' | 'amoled' | 'catppuccin-mocha';
+
+/**
+ * Check if the given theme is a dark variant.
+ */
+export function isDarkTheme(theme: string): boolean {
+  return theme === 'dark' || theme === 'amoled' || theme === 'catppuccin-mocha';
+}
 
 /**
  * Convert user-facing theme preference to Uniwind theme string
  */
-function toUniwindTheme(
-  pref: ThemePreference
-): 'system' | 'light' | 'dark' | 'amoled' {
-  return pref === 'System'
-    ? 'system'
-    : (pref.toLowerCase() as 'light' | 'dark' | 'amoled');
+function toUniwindTheme(pref: ThemePreference): UniwindTheme {
+  switch (pref) {
+    case 'System':
+      return 'system';
+    case 'Light':
+      return 'light';
+    case 'Dark':
+      return 'dark';
+    case 'Amoled':
+      return 'amoled';
+    case 'CatppuccinMocha':
+      return 'catppuccin-mocha';
+  }
 }
 
 /**
@@ -34,6 +52,8 @@ function fromUniwindTheme(
       return 'Dark';
     case 'amoled':
       return 'Amoled';
+    case 'catppuccin-mocha':
+      return 'CatppuccinMocha';
     default:
       return 'System';
   }

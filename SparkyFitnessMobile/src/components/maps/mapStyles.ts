@@ -1,3 +1,6 @@
+import type { MapProps } from '@maplibre/maplibre-react-native';
+import catppuccinMochaMapStyle from './catppuccinMochaMapStyle.json';
+
 /**
  * MapLibre styles on OpenFreeMap's public instance. No API key, no account,
  * and no Google Play Services: MapLibre Native renders these vector tiles
@@ -9,8 +12,21 @@
  */
 export const MAP_STYLE_LIGHT = 'https://tiles.openfreemap.org/styles/liberty';
 export const MAP_STYLE_DARK = 'https://tiles.openfreemap.org/styles/dark';
+export const MAP_STYLE_CATPPUCCIN_MOCHA = catppuccinMochaMapStyle;
 
-export function resolveMapLibreStyle(dark: boolean = false): string {
+export type MapStyleValue = MapProps['mapStyle'];
+
+/**
+ * Resolves the appropriate MapLibre style based on light/dark mode and active
+ * theme preference (e.g. Catppuccin Mocha).
+ */
+export function resolveMapLibreStyle(
+  dark: boolean = false,
+  theme?: string
+): MapStyleValue {
+  if (theme === 'catppuccin-mocha') {
+    return MAP_STYLE_CATPPUCCIN_MOCHA as unknown as MapStyleValue;
+  }
   return dark ? MAP_STYLE_DARK : MAP_STYLE_LIGHT;
 }
 

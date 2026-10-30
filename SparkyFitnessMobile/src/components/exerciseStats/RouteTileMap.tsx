@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useCSSVariable, useUniwind } from 'uniwind';
 import type { GpsTrackPoint } from '@workspace/shared';
 import { routeRegion, usableRoutePoints } from '../../utils/cardioSession';
+import { isDarkTheme } from '../../services/themeService';
 import { usesGoogleMapsOnAndroid } from '../../utils/routeMapSupport';
 import MapSurface from '../maps/MapSurface';
 import type { MapSurfaceHandle } from '../maps/mapSurfaceTypes';
@@ -31,7 +32,7 @@ const RouteTileMap: React.FC<RouteTileMapProps> = ({
 }) => {
   const { t } = useTranslation();
   const { theme } = useUniwind();
-  const isDark = theme === 'dark' || theme === 'amoled';
+  const isDark = isDarkTheme(theme);
   const [routeColor, startColor, finishColor] = useCSSVariable([
     '--color-accent-primary',
     '--color-icon-success',

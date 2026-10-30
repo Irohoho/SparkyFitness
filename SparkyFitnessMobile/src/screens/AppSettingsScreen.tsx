@@ -93,6 +93,12 @@ const AppSettingsScreen: React.FC<AppSettingsScreenProps> = ({
       value: 'Amoled',
     },
     {
+      label: t('settings.theme.catppuccinMocha', {
+        defaultValue: 'Catppuccin Mocha',
+      }),
+      value: 'CatppuccinMocha',
+    },
+    {
       label: t('settings.theme.system', { defaultValue: 'System' }),
       value: 'System',
     },
