@@ -150,7 +150,8 @@ const MarkerShape: React.FC<{ marker: MapMarkerSpec }> = ({ marker }) => {
         // A thin light border keeps the dot visible over dark tiles.
         borderWidth: marker.shape === 'pin' ? 2 : 0,
         borderColor: '#ffffff',
-        opacity: marker.opacity ?? 1,
+        // Pins (editor waypoints) remain fully opaque so the underlying route line does not bleed through.
+        opacity: marker.shape === 'pin' ? 1 : (marker.opacity ?? 1),
       }}
     />
   );
@@ -170,6 +171,7 @@ const MapLibreMapSurface = forwardRef<MapSurfaceHandle, MapSurfaceProps>(
       initialViewport,
       dark = false,
       interactive = true,
+      attribution = true,
       showUserLocation = false,
       hideFromAccessibility = false,
       lines = [],
@@ -269,7 +271,7 @@ const MapLibreMapSurface = forwardRef<MapSurfaceHandle, MapSurfaceProps>(
         style={StyleSheet.absoluteFill}
         mapStyle={resolveMapLibreStyle(dark, theme)}
         logo={false}
-        attribution={interactive}
+        attribution={attribution}
         compass={false}
         scaleBar={false}
         dragPan={interactive}

@@ -11,7 +11,7 @@ import type { MapSurfaceHandle } from '../maps/mapSurfaceTypes';
 import RouteLine from './RouteLine';
 
 const HEIGHT = 220;
-const PREVIEW_PADDING = { top: 18, right: 18, bottom: 22, left: 18 };
+const PREVIEW_PADDING = { top: 18, right: 18, bottom: 26, left: 18 };
 
 interface RouteTileMapProps {
   points: readonly Pick<GpsTrackPoint, 'lat' | 'lon'>[];
@@ -85,6 +85,7 @@ const RouteTileMap: React.FC<RouteTileMapProps> = ({
         }}
         dark={isDark}
         interactive={false}
+        attribution={false}
         lite
         hideFromAccessibility
         onDidFailLoadingMap={() => setMapFailed(true)}
