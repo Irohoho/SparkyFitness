@@ -269,7 +269,7 @@ const MapLibreMapSurface = forwardRef<MapSurfaceHandle, MapSurfaceProps>(
         style={StyleSheet.absoluteFill}
         mapStyle={resolveMapLibreStyle(dark, theme)}
         logo={false}
-        attribution
+        attribution={interactive}
         compass={false}
         scaleBar={false}
         dragPan={interactive}
