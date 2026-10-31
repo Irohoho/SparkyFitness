@@ -2,6 +2,7 @@ import React, {
   forwardRef,
   useCallback,
   useImperativeHandle,
+  useMemo,
   useRef,
 } from 'react';
 import { type NativeSyntheticEvent, StyleSheet, View } from 'react-native';
@@ -73,50 +74,22 @@ const boundsForPoints = (
   return [west, clampLat(south), east, clampLat(north)];
 };
 
-const lineFeature = (points: readonly MapCoordinate[]) =>
-  ({
-    type: 'Feature',
-    properties: {},
-    geometry: {
-      type: 'LineString',
-      coordinates: points.map(toLngLat),
-    },
-  }) as const;
-
-/** One layer per stretch, so a straight stretch can be dashed on its own. */
-const RouteLineLayer: React.FC<{ line: MapLine; index: number }> = ({
-  line,
-  index,
-}) => {
-  const paint = {
-    'line-color': line.color,
-    'line-width': line.width ?? 4,
-  };
-  return (
-    <GeoJSONSource
-      id={`route-line-source-${index}`}
-      data={lineFeature(line.points)}
-    >
-      {line.dashed ? (
-        <Layer
-          id={`route-line-dashed-${index}`}
-          key={`route-line-dashed-${index}`}
-          type="line"
-          layout={{ 'line-cap': 'round', 'line-join': 'round' }}
-          paint={{ ...paint, 'line-dasharray': [2, 2] }}
-        />
-      ) : (
-        <Layer
-          id={`route-line-solid-${index}`}
-          key={`route-line-solid-${index}`}
-          type="line"
-          layout={{ 'line-cap': 'round', 'line-join': 'round' }}
-          paint={paint}
-        />
-      )}
-    </GeoJSONSource>
-  );
-};
+const toLineFeatureCollection = (
+  lines: readonly MapLine[],
+  dashed: boolean
+) => ({
+  type: 'FeatureCollection' as const,
+  features: lines
+    .filter((l) => (l.dashed ?? false) === dashed && l.points.length >= 2)
+    .map((l) => ({
+      type: 'Feature' as const,
+      properties: {},
+      geometry: {
+        type: 'LineString' as const,
+        coordinates: l.points.map(toLngLat),
+      },
+    })),
+});
 
 /**
  * The dot or ring the route preview draws. Editor points are drawn the same
@@ -190,6 +163,19 @@ const MapLibreMapSurface = forwardRef<MapSurfaceHandle, MapSurfaceProps>(
       null
     );
     const lastMarkerPress = useRef(0);
+
+    const solidData = useMemo(
+      () => toLineFeatureCollection(lines, false),
+      [lines]
+    );
+    const dashedData = useMemo(
+      () => toLineFeatureCollection(lines, true),
+      [lines]
+    );
+    const solidColor = lines.find((l) => !l.dashed)?.color ?? '#3b82f6';
+    const solidWidth = lines.find((l) => !l.dashed)?.width ?? 4;
+    const dashedColor = lines.find((l) => l.dashed)?.color ?? '#3b82f6';
+    const dashedWidth = lines.find((l) => l.dashed)?.width ?? 4;
 
     // A camera move asked for before the style is ready is dropped by
     // MapLibre, so keep the last one and apply it once the style loads.
@@ -319,9 +305,26 @@ const MapLibreMapSurface = forwardRef<MapSurfaceHandle, MapSurfaceProps>(
           }}
         />
         {showUserLocation ? <UserLocation /> : null}
-        {lines.map((line, index) => (
-          <RouteLineLayer key={`line-${index}`} line={line} index={index} />
-        ))}
+        <GeoJSONSource id="route-lines-solid-source" data={solidData}>
+          <Layer
+            id="route-lines-solid"
+            type="line"
+            layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+            paint={{ 'line-color': solidColor, 'line-width': solidWidth }}
+          />
+        </GeoJSONSource>
+        <GeoJSONSource id="route-lines-dashed-source" data={dashedData}>
+          <Layer
+            id="route-lines-dashed"
+            type="line"
+            layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+            paint={{
+              'line-color': dashedColor,
+              'line-width': dashedWidth,
+              'line-dasharray': [2, 2],
+            }}
+          />
+        </GeoJSONSource>
         {markers.map((marker, index) => {
           const shape = <MarkerShape marker={marker} />;
           const markerKey = `marker-${index}-${marker.color}-${marker.opacity ?? 1}-${marker.shape}-${marker.size ?? 0}`;
