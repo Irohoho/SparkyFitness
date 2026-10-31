@@ -17,5 +17,5 @@ config.transformer.minifierConfig = {
 module.exports = withUniwindConfig(config, {
   cssEntryFile: './global.css',
   dtsFile: './src/uniwind-types.d.ts',
-  extraThemes: ['amoled', 'catppuccin-mocha'],
+  extraThemes: ['amoled', 'catppuccin-mocha', 'catppuccin-mocha-peach'],
 });

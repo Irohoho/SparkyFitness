@@ -21,6 +21,7 @@ describe('themeService', () => {
       expect(isDarkTheme('dark')).toBe(true);
       expect(isDarkTheme('amoled')).toBe(true);
       expect(isDarkTheme('catppuccin-mocha')).toBe(true);
+      expect(isDarkTheme('catppuccin-mocha-peach')).toBe(true);
     });
 
     it('returns false for light and other variants', () => {
@@ -40,6 +41,12 @@ describe('themeService', () => {
       await AsyncStorage.setItem(THEME_KEY, 'CatppuccinMocha');
       await initializeTheme();
       expect(Uniwind.setTheme).toHaveBeenCalledWith('catppuccin-mocha');
+    });
+
+    it('applies CatppuccinMochaPeach preference from storage', async () => {
+      await AsyncStorage.setItem(THEME_KEY, 'CatppuccinMochaPeach');
+      await initializeTheme();
+      expect(Uniwind.setTheme).toHaveBeenCalledWith('catppuccin-mocha-peach');
     });
 
     it('applies Amoled preference from storage', async () => {
@@ -62,6 +69,14 @@ describe('themeService', () => {
       await setThemePreference('CatppuccinMocha');
       expect(await AsyncStorage.getItem(THEME_KEY)).toBe('CatppuccinMocha');
       expect(Uniwind.setTheme).toHaveBeenCalledWith('catppuccin-mocha');
+    });
+
+    it('saves CatppuccinMochaPeach to storage and updates Uniwind', async () => {
+      await setThemePreference('CatppuccinMochaPeach');
+      expect(await AsyncStorage.getItem(THEME_KEY)).toBe(
+        'CatppuccinMochaPeach'
+      );
+      expect(Uniwind.setTheme).toHaveBeenCalledWith('catppuccin-mocha-peach');
     });
 
     it('saves Dark to storage and updates Uniwind', async () => {

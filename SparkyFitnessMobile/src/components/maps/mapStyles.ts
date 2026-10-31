@@ -24,7 +24,7 @@ export function resolveMapLibreStyle(
   dark: boolean = false,
   theme?: string
 ): MapStyleValue {
-  if (theme === 'catppuccin-mocha') {
+  if (theme === 'catppuccin-mocha' || theme === 'catppuccin-mocha-peach') {
     return MAP_STYLE_CATPPUCCIN_MOCHA as unknown as MapStyleValue;
   }
   return dark ? MAP_STYLE_DARK : MAP_STYLE_LIGHT;
